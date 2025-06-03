@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+---
+
+<Layout title="Akhil Karampuri | Home">
+  <section class="flex flex-col items-center justify-center mt-0 pt-0 pb-4 px-2 text-center w-full max-w-md mx-auto sm:max-w-2xl">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-4 mt-0">I'm Akhil Karampuri</h2>
+    <p class="text-lg mb-6 italic">
+      In the heart of Maharashtra, where the monsoon sings and the sun paints gold on fields,
+      <br />
+      I, Akhil, a 19-year-old dreamer, weave my story in code and curiosity.
+    </p>
+    <p class="text-lg mb-6">
+      Having completed my diploma in Computer Science and Engineering,
+      <br />
+      I now stand at the threshold of new beginnings—
+      <br />
+      Soon to embark on a BTech journey, where ambition meets opportunity.
+      <br />
+      My days have been filled with algorithms, my nights with the glow of innovation.
+      <br />
+      Artificial Intelligence and Machine Learning call to me—
+      <br />
+      The poetry of logic, the art of teaching machines to dream.
+    </p>
+    <p class="text-lg mb-6">
+      Frontend development is my canvas, where I paint with pixels and craft with code.
+      <br />
+      Languages and tools are my brushes, projects my gallery—
+      <br />
+      Each line a step further in my journey from theory to creation.
+    </p>
+    <p class="text-lg mb-6">
+      Yet, beyond the circuits and screens, I find joy in the gentle art of storytelling.<br />
+      My blog is a collection of moments—snapshots of life, lessons, and laughter.<br />
+      And through my lens, photography becomes a silent poem, capturing the world as I see it.
+    </p>
+  </section>
+
+  <section class="flex flex-col items-center mb-12">
+    <a href="/resume.pdf" target="_blank" class="btn text-lg font-semibold px-6 py-3 mt-4">View My Resume (PDF)</a>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-3xl font-bold text-center mb-8">My Portfolio</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {allProjects.map(project => (
+        <ProjectCard 
+          title={project.data.title}
+          description={project.data.description}
+          image={project.data.image}
+          tags={project.data.tags}
+          url={`/portfolio/${project.slug}`}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

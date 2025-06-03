@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../utils/dateUtils';
+import { getReadingTime } from '../utils/readingTime';
+
+interface Props {
+  article: CollectionEntry<'blog'>;
+  isMainFeature?: boolean;
+}
+
+const { article, isMainFeature = false } = Astro.props;
+const readingTime = getReadingTime(article.body);
+---
+
+<article class={`relative ${isMainFeature ? 'col-span-12 md:col-span-8 mb-8' : 'col-span-12 md:col-span-4 mb-6'}`}>
+  <a href={`/blog/${article.slug}`} class="block group">
+    <div class="overflow-hidden mb-4">
+      <img 
+        src={article.data.image} 
+        alt={article.data.title} 
+        class="w-full h-auto grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+        height={isMainFeature ? "500" : "300"}
+        width="800"
+      />
+    </div>
+    <h2 class={`font-serif font-bold leading-tight mb-2 group-hover:underline ${isMainFeature ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'}`}>
+      {article.data.title}
+    </h2>
+    <p class="text-ink-light mb-3">
+      {article.data.excerpt}
+    </p>
+    <div class="post-meta flex items-center justify-between">
+      <span>{formatDate(article.data.date)}</span>
+      <span>{readingTime} min read</span>
+    </div>
+  </a>
+</article>

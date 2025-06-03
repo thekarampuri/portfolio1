@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const photos = [
+  {
+    url: "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg",
+    title: "Urban Perspectives",
+    description: "Capturing the soul of city life"
+  },
+  {
+    url: "https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg",
+    title: "Nature's Poetry",
+    description: "The quiet beauty of natural landscapes"
+  },
+  {
+    url: "https://images.pexels.com/photos/2156881/pexels-photo-2156881.jpeg",
+    title: "Moments in Time",
+    description: "Fleeting instances frozen forever"
+  },
+  {
+    url: "https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg",
+    title: "Light and Shadow",
+    description: "Playing with natural contrasts"
+  },
+  {
+    url: "https://images.pexels.com/photos/1738434/pexels-photo-1738434.jpeg",
+    title: "Street Stories",
+    description: "Life unfolding in public spaces"
+  },
+  {
+    url: "https://images.pexels.com/photos/1906658/pexels-photo-1906658.jpeg",
+    title: "Architectural Dreams",
+    description: "Geometry in the built environment"
+  }
+];
+---
+
+<Layout title="Photography | The Daily Chronicle">
+  <div class="max-w-6xl mx-auto">
+    <header class="text-center mb-12">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Through My Lens</h1>
+      <div class="w-16 h-1 bg-ink mx-auto mb-6"></div>
+      <p class="text-lg text-ink-light max-w-2xl mx-auto">
+        Where moments become memories, and light tells stories
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {photos.map(photo => (
+        <div class="group">
+          <div class="overflow-hidden mb-4">
+            <img 
+              src={photo.url} 
+              alt={photo.title}
+              class="w-full h-64 object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+              width="400"
+              height="300"
+            />
+          </div>
+          <h2 class="font-serif font-bold text-xl mb-2">{photo.title}</h2>
+          <p class="text-ink-light">{photo.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div class="font-serif text-xl italic border-t border-b border-ink py-6">
+          <p>
+            Through the viewfinder I see<br>
+            Stories untold, moments free<br>
+            Each click a verse, each frame a line<br>
+            In the poetry of frozen time
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { animate, stagger } from 'motion';
+  
+  // Animate photos on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    animate('.grid > div', 
+      { opacity: [0, 1], y: [20, 0] },
+      { delay: stagger(0.1), duration: 0.6, easing: [0.25, 0.1, 0.25, 1] }
+    );
+  });
+</script>

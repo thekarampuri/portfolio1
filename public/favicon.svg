@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <style>
+    path, rect, line, circle {
+      stroke: #1a1a1a;
+    }
+    @media (prefers-color-scheme: dark) {
+      path, rect, line, circle {
+        stroke: #f2f0e6;
+      }
+    }
+  </style>
+  <!-- Face shape -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke-width="2" />
+  
+  <!-- Glasses -->
+  <rect x="40" y="50" width="15" height="6" rx="2" fill="none" stroke-width="2" />
+  <rect x="65" y="50" width="15" height="6" rx="2" fill="none" stroke-width="2" />
+  <line x1="55" y1="53" x2="65" y2="53" stroke-width="2" />
+  <line x1="40" y1="53" x2="35" y2="53" stroke-width="2" />
+  <line x1="80" y1="53" x2="85" y2="53" stroke-width="2" />
+  
+  <!-- Simplified newspaper -->
+  <rect x="35" y="70" width="50" height="15" rx="0" fill="none" stroke-width="2" />
+  <line x1="40" y1="75" x2="60" y2="75" stroke-width="1" />
+  <line x1="40" y1="80" x2="70" y2="80" stroke-width="1" />
+</svg>

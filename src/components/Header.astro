@@ -1,0 +1,67 @@
+---
+---
+
+<header class="py-6 mb-8 relative">
+  <nav class="flex justify-center mb-6">
+    <ul class="flex space-x-6 font-serif text-sm border-y border-ink py-1 px-4 items-center justify-center">
+      <li><a href="/" class="hover:underline">Home</a></li>
+      <li><a href="/about" class="hover:underline">About</a></li>
+      <li><a href="/blog" class="hover:underline">Blog</a></li>
+      <li><a href="/photography" class="hover:underline">Photography</a></li>
+    </ul>
+  </nav>
+  
+  <div class="text-center mb-6">
+    <div class="inline-block mb-4">
+      <img 
+        src="/images/avatar.svg" 
+        alt="Logo" 
+        width="80" 
+        height="80"
+        class="mx-auto"
+      />
+    </div>
+    <h1 class="font-gothic text-4xl sm:text-5xl md:text-6xl mb-6 leading-none">Hello, You.</h1>
+    <div class="border-t border-b border-ink py-2 max-w-2xl mx-auto mt-12">
+      <p class="italic font-serif text-ink-light text-lg sm:text-xl">Where code meets creativity, and humor finds its home</p>
+    </div>
+  </div>
+  
+  <button id="theme-toggle" class="absolute top-2 right-2 p-1 border border-ink rounded" aria-label="Toggle dark mode">
+    <i class="fas fa-sun sun-icon"></i>
+    <i class="fas fa-moon moon-icon hidden"></i>
+  </button>
+</header>
+
+<script>
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
+  
+  if (themeToggle && sunIcon && moonIcon) {
+    // Set initial icon state
+    if (document.documentElement.classList.contains('dark')) {
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    } else {
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      
+      // Toggle icons
+      sunIcon.classList.toggle('hidden');
+      moonIcon.classList.toggle('hidden');
+      
+      // Save preference to localStorage
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  }
+</script>

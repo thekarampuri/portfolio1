@@ -1,0 +1,37 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-ink mt-12 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <h3 class="font-serif text-xl mb-4">About</h3>
+      <p class="text-ink-light">In lines of code and woven dreams I dwell,<br>
+Where tradition and technology gently swell.<br>
+Akhil Karampuri, seeker of stories and light,<br>
+Blending logic and art, day and night.</p>
+    </div>
+    <div>
+      <h3 class="font-serif text-xl mb-4">Navigation</h3>
+      <ul class="space-y-2">
+        <li><a href="/" class="hover:underline"><i class="fas fa-home mr-2"></i>Home</a></li>
+        <li><a href="/about" class="hover:underline"><i class="fas fa-user mr-2"></i>About</a></li>
+        <li><a href="/blog" class="hover:underline"><i class="fas fa-pen-nib mr-2"></i>Blog</a></li>
+        <li><a href="/photography" class="hover:underline"><i class="fas fa-camera mr-2"></i>Photography</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-serif text-xl mb-4">Connect</h3>
+      <ul class="space-y-2">
+        <li><a href="https://www.instagram.com/akhil.karampuri?igsh=MTE4dWJuM2xjYml6bQ==" target="_blank" rel="noopener noreferrer" class="hover:underline"><i class="fab fa-instagram mr-2"></i>Instagram</a></li>
+        <li><a href="https://github.com/thekarampuri" target="_blank" rel="noopener noreferrer" class="hover:underline"><i class="fab fa-github mr-2"></i>GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/akhil-karampuri-502740275?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="hover:underline"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a></li>
+        <li><a href="mailto:akhilkarampuri25@gmail.com" class="hover:underline"><i class="fas fa-envelope mr-2"></i>Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center mt-8 pt-8 border-t border-gray-300 text-sm text-ink-light">
+    <p>&copy; {currentYear} All rights reserved.</p>
+    <p class="mt-2 font-mono text-xs">Made with <span class="text-red-500">&#10084;&#65039;</span> by Akhil K.</p>
+  </div>
+</footer>

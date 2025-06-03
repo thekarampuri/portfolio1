@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+
+// Generate static paths for all tags
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+  
+  return uniqueTags.map(tag => {
+    const filteredPosts = allPosts.filter(post => 
+      post.data.tags.includes(tag)
+    ).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    
+    return {
+      params: { tag },
+      props: { posts: filteredPosts, tag },
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
+
+// Get all unique tags for the sidebar
+const allPosts = await getCollection('blog');
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))].sort();
+---
+
+<Layout title={`${tag} Articles | The Daily Chronicle`}>
+  <header class="mb-12">
+    <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4 capitalize">Articles tagged: {tag}</h1>
+    <p class="text-lg text-ink-light">Showing {posts.length} article{posts.length !== 1 ? 's' : ''}</p>
+  </header>
+  
+  <div class="flex flex-col md:flex-row gap-8">
+    <aside class="md:w-1/4">
+      <div class="sticky top-8">
+        <h2 class="font-serif text-xl font-bold mb-4 pb-2 border-b border-gray-300">Categories</h2>
+        <ul class="space-y-2 mb-8">
+          <li><a href="/blog" class="block py-1 border-b border-transparent hover:border-ink">All Articles</a></li>
+          {allTags.map(t => (
+            <li>
+              <a 
+                href={`/blog/tag/${t}`} 
+                class={`block py-1 border-b border-transparent hover:border-ink capitalize ${t === tag ? 'font-bold' : ''}`}
+              >
+                {t}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+    
+    <div class="md:w-3/4">
+      {posts.length > 0 ? (
+        <div class="divide-y divide-gray-200">
+          {posts.map(post => (
+            <ArticleCard article={post} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-center py-12 text-ink-light italic">No articles found with this tag.</p>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { animate, stagger } from 'motion';
+  
+  // Animate articles on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    animate('.article-card', 
+      { opacity: [0, 1], y: [20, 0] },
+      { delay: stagger(0.1), duration: 0.5, easing: [0.25, 0.1, 0.25, 1] }
+    );
+  });
+</script>

@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+// Get all blog posts sorted by date
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Get unique tags
+const allTags = [...new Set(allBlogPosts.flatMap(post => post.data.tags))].sort();
+---
+
+<Layout title="Blog | The Daily Chronicle">
+  <header class="mb-12 text-center">
+    <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">The Archives</h1>
+    <p class="text-lg text-ink-light max-w-2xl mx-auto">A collection of thoughts, stories, and ideas worth sharing.</p>
+  </header>
+  <div class="max-w-3xl mx-auto">
+    <div class="divide-y divide-gray-200">
+      {sortedPosts.map(post => (
+        <ArticleCard article={post} />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { animate, stagger } from 'motion';
+  
+  // Animate articles on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    animate('.article-card', 
+      { opacity: [0, 1], y: [20, 0] },
+      { delay: stagger(0.1), duration: 0.5, easing: [0.25, 0.1, 0.25, 1] }
+    );
+  });
+</script>

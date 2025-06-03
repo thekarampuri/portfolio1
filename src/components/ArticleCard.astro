@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../utils/dateUtils';
+import { getReadingTime } from '../utils/readingTime';
+
+interface Props {
+  article: CollectionEntry<'blog'>;
+}
+
+const { article } = Astro.props;
+const readingTime = getReadingTime(article.body);
+---
+
+<article class="article-card">
+  <a href={`/blog/${article.slug}`} class="grid md:grid-cols-3 gap-6 group">
+    <div class="md:col-span-1">
+      <div class="overflow-hidden">
+        <img 
+          src={article.data.image} 
+          alt={article.data.title} 
+          class="w-full h-auto grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+          width="300"
+          height="200"
+        />
+      </div>
+    </div>
+    <div class="md:col-span-2">
+      <h3 class="font-serif font-bold text-xl md:text-2xl mb-2 group-hover:underline">
+        {article.data.title}
+      </h3>
+      <p class="text-ink-light mb-3">
+        {article.data.excerpt}
+      </p>
+      <div class="post-meta flex items-center justify-between">
+        <span>{formatDate(article.data.date)}</span>
+        <span>{readingTime} min read</span>
+      </div>
+    </div>
+  </a>
+</article>
